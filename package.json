@@ -4,7 +4,8 @@
   "description": "Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-prod": "node -r dotenv/config ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "eslint-plugin-import": "^2.27.5"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.3.2"
+    "@hapi/hapi": "^21.3.2",
+    "dotenv": "^16.1.4"
   }
 }
