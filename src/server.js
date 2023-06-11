@@ -1,4 +1,5 @@
 const Hapi = require('@hapi/hapi');
+const ClientError = require('./exceptions/ClientError');
 
 const init = async () => {
   const server = Hapi.server({
@@ -9,6 +10,35 @@ const init = async () => {
         origin: ['*'],
       },
     },
+  });
+
+  server.ext('onPreResponse', (request, h) => {
+    const { response } = request;
+
+    if (response instanceof Error) {
+      if (response instanceof ClientError) {
+        const newResponse = h
+          .response({
+            status: 'fail',
+            message: response.message,
+          })
+          .code(response.statusCode);
+
+        return newResponse;
+      }
+
+      if (!response.isServer) return h.continue;
+
+      // Server ERROR
+      const serverErrorResponse = h
+        .response({
+          status: 'error',
+          message: 'terjadi kegagalan di server kami',
+        })
+        .code(500);
+      return serverErrorResponse;
+    }
+    return h.continue;
   });
 
   await server.start();
