@@ -33,7 +33,7 @@ class AlbumsService {
     return result.rows;
   }
 
-  async getAlbumsByID(id) {
+  async getAlbumById(id) {
     const getAlbumByIDQuery = {
       text: 'SELECT * FROM albums WHERE id = $1',
       values: [id],
@@ -48,7 +48,7 @@ class AlbumsService {
     return result.rows[0];
   }
 
-  async editAlbumByID(id, { name, year }) {
+  async editAlbumById(id, { name, year }) {
     const editAlbumByIDQuery = {
       text: 'UPDATE albums SET name = $1, year = $2 WHERE id = $3 RETURNING id',
       values: [name, year, id],
@@ -61,7 +61,7 @@ class AlbumsService {
     }
   }
 
-  async deleteAlbumByID(id) {
+  async deleteAlbumById(id) {
     const deleteAlbumByIDQuery = {
       text: 'DELETE FROM albums WHERE id = $1',
       values: [id],
