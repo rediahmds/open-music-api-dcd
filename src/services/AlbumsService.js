@@ -13,7 +13,7 @@ class AlbumsService {
     const id = `album-${nanoid(16)}`;
 
     const addAlbumQuery = {
-      text: 'INSERT INTO notes VALUES($1, $2, $3) RETURNING id',
+      text: 'INSERT INTO albums VALUES($1, $2, $3) RETURNING id',
       values: [id, name, year],
     };
 
@@ -29,7 +29,6 @@ class AlbumsService {
 
   async getAlbums() {
     const result = await this._pool.query('SELECT * FROM albums');
-    console.log(result);
     return result.rows;
   }
 
@@ -63,7 +62,7 @@ class AlbumsService {
 
   async deleteAlbumById(id) {
     const deleteAlbumByIDQuery = {
-      text: 'DELETE FROM albums WHERE id = $1',
+      text: 'DELETE FROM albums WHERE id = $1 RETURNING id',
       values: [id],
     };
 
