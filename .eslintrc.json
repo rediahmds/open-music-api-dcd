@@ -9,5 +9,14 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+      "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+      "comma-dangle": [
+        "error",
+        {
+          "functions": "never",
+          "objects": "always-multiline",
+          "arrays": "always-multiline"
+        }
+      ]
     }
 }

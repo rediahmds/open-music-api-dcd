@@ -5,11 +5,11 @@ Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.
 ## ✅ To-do List
 
 - [ ] Kriteria wajib
-  - [ ] CRUD `/albums` endpoint (gunakan plugin)
+  - [x] CRUD `/albums` endpoint (gunakan plugin)
   - [ ] CRUD `/songs` endpoint (gunakan plugin)
   - [ ] Validasi data di kedua endpoint menggunakan `Joi`
-  - [ ] Error Handling (gunakan extension `onPreResponse` event dari Hapi)
-  - [ ] Menggunakan database dan `dotenv`
+  - [x] Error Handling (gunakan extension `onPreResponse` event dari Hapi)
+  - [x] Menggunakan database dan `dotenv`
 - [ ] Kriteria opsional
   - [ ] Memunculkan daftar lagu pada suatu album
   - [ ] Query parameter untuk mencari lagu
