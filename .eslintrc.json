@@ -17,6 +17,7 @@
           "objects": "always-multiline",
           "arrays": "always-multiline"
         }
-      ]
+      ],
+      "linebreak-style": ["error", "windows"]
     }
 }
