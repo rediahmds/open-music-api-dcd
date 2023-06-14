@@ -6,7 +6,7 @@ Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.
 
 - [ ] Kriteria wajib
   - [x] CRUD `/albums` endpoint (gunakan plugin)
-  - [ ] CRUD `/songs` endpoint (gunakan plugin)
+  - [x] CRUD `/songs` endpoint (gunakan plugin)
   - [ ] Validasi data di kedua endpoint menggunakan `Joi`
   - [x] Error Handling (gunakan extension `onPreResponse` event dari Hapi)
   - [x] Menggunakan database dan `dotenv`
