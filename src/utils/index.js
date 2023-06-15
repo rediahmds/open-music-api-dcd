@@ -28,4 +28,31 @@ const getSongsByAlbumId = async (albumId, albumService) => {
   return songs;
 };
 
-module.exports = { mapDBtoModel, getSongsByAlbumId };
+const getSongsByQueryParam = ({ title, performer }) => {
+  let query;
+
+  if (title && performer) {
+    query = {
+      text: 'SELECT * FROM songs WHERE title ILIKE $1 AND performer ILIKE $2',
+      values: [`%${title}%`, `%${performer}%`],
+    };
+  } else if (title) {
+    query = {
+      text: 'SELECT * FROM songs WHERE title ILIKE $1',
+      values: [`%${title}%`],
+    };
+  } else if (performer) {
+    query = {
+      text: 'SELECT * FROM songs WHERE performer ILIKE $1',
+      values: [`%${performer}%`],
+    };
+  } else {
+    query = {
+      text: 'SELECT * FROM songs',
+    };
+  }
+
+  return query;
+};
+
+module.exports = { mapDBtoModel, getSongsByAlbumId, getSongsByQueryParam };
