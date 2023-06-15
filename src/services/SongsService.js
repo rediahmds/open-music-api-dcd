@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../exceptions/InvariantError');
 const NotFoundError = require('../exceptions/NotFoundError');
-const { mapDBtoModel } = require('../utils');
+const { mapDBtoModel, getSongsByQueryParam } = require('../utils');
 
 class SongsService {
   constructor() {
@@ -26,8 +26,9 @@ class SongsService {
     return result.rows[0].id;
   }
 
-  async getSongs() {
-    const queryResult = await this._pool.query('SELECT * FROM songs');
+  async getSongs(requestQuery) {
+    const songsQuery = getSongsByQueryParam(requestQuery);
+    const queryResult = await this._pool.query(songsQuery);
 
     const songsArr = queryResult.rows.map(({ id, title, performer }) => ({
       id,
