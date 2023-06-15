@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const mapDBtoModel = ({
   id,
   title,
@@ -6,9 +5,15 @@ const mapDBtoModel = ({
   performer,
   genre,
   duration,
-  album_id,
+  album_id: albumId,
 }) => ({
-  id, title, year, performer, genre, duration, albumId: album_id,
+  id,
+  title,
+  year,
+  performer,
+  genre,
+  duration,
+  albumId,
 });
 
 const getSongsByAlbumId = async (albumId, albumService) => {
