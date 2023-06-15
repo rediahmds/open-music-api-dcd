@@ -1,24 +1,33 @@
 # 🎼 OpenMusic
 
-OpenMusic adalah layanan backend yang digunakan untuk submission pada kelas "Fundamental Aplikasi Back-end" Dicoding Indonesia.
+OpenMusic is a backend service app used for the submission in the "Fundamentals of Back-end Application" class by Dicoding Indonesia.
 
-## ✅ To-do List
+## 📑 Major Topics Covered in Each Version
 
-- [x] ~~Kriteria wajib~~
-  - [x] CRUD `/albums` endpoint (gunakan plugin)
-  - [x] CRUD `/songs` endpoint (gunakan plugin)
-  - [x] Validasi data di kedua endpoint menggunakan `Joi`
-  - [x] Error Handling (gunakan extension `onPreResponse` event dari Hapi)
-  - [x] Menggunakan database dan `dotenv`
-- [x] Kriteria opsional
-  - [x] Memunculkan daftar lagu pada suatu album
-  - [x] Query parameter untuk mencari lagu
-- [x] Memenuhi semua postman request (Test API)
-- [x] Menggunakan `ESLint` dan salah satu style guide
+### 1️⃣ OpenMusic V1
+
+1. This version introduces a "cleaner" way to create a RESTful API using the Hapi plugin.
+2. Validation is done using `Joi`.
+3. Using `node-postgres` to interact with PostgreSQL in a Node app.
+4. Implements the migration technique to manipulate table structures using `pgm`.
+
+#### ✅ OpenMusic V1: To-do List
+
+- [x] Mandatory criteria
+  - [x] CRUD `/albums` endpoint (use plugin)
+  - [x] CRUD `/songs` endpoint (use plugin)
+  - [x] Data validation on both endpoints using `Joi`
+  - [x] Error handling (use `onPreResponse` event extension from Hapi)
+  - [x] Use database and `dotenv`
+- [x] Optional criteria
+  - [x] Display a list of songs in an album
+  - [x] Query parameter for song search
+- [x] Fulfill all Postman requests (API testing)
+- [x] Use `ESLint` and one of the style guides
 - [x] Clean code
 
-## 💡 Tips
+#### 💡 OpenMusic V1: Tips
 
-- Untuk menghindari kesalahan `binding` :
-  - Gunakan arrow function pada berkas routes (Preferred, lighter, no need to install any packages)
-  - Gunakan package `auto-bind`
+- To avoid `binding` errors:
+  - Use arrow functions in route files (preferred, lighter, no need to install any packages)
+  - Use the `auto-bind` package.
