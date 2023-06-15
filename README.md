@@ -31,3 +31,7 @@ OpenMusic is a backend service app used for the submission in the "Fundamentals 
 - To avoid `binding` errors:
   - Use arrow functions in route files (preferred, lighter, no need to install any packages)
   - Use the `auto-bind` package.
+
+## ℹ️ More Information
+
+- GitHub repo: [rediahmds/open-music-api-dcd: Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia. (github.com)](https://github.com/rediahmds/open-music-api-dcd)
