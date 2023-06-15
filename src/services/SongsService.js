@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../exceptions/InvariantError');
 const NotFoundError = require('../exceptions/NotFoundError');
-const { mapDBtoModel, getSongsByQueryParam } = require('../utils');
+const { mapDBtoModel } = require('../utils');
 
 class SongsService {
   constructor() {
@@ -26,17 +26,32 @@ class SongsService {
     return result.rows[0].id;
   }
 
-  async getSongs(requestQuery) {
-    const songsQuery = getSongsByQueryParam(requestQuery);
-    const queryResult = await this._pool.query(songsQuery);
+  async getSongs({ title, performer }) {
+    let songsQuery;
 
-    const songsArr = queryResult.rows.map(({ id, title, performer }) => ({
-      id,
-      title,
-      performer,
-    }));
+    if (title && performer) {
+      songsQuery = {
+        text: 'SELECT id, title, performer FROM songs WHERE title ILIKE $1 AND performer ILIKE $2',
+        values: [`%${title}%`, `%${performer}%`],
+      };
+    } else if (title) {
+      songsQuery = {
+        text: 'SELECT id, title, performer FROM songs WHERE title ILIKE $1',
+        values: [`%${title}%`],
+      };
+    } else if (performer) {
+      songsQuery = {
+        text: 'SELECT id, title, performer FROM songs WHERE performer ILIKE $1',
+        values: [`%${performer}%`],
+      };
+    } else {
+      songsQuery = {
+        text: 'SELECT id, title, performer FROM songs',
+      };
+    }
+    const result = await this._pool.query(songsQuery);
 
-    return songsArr;
+    return result.rows;
   }
 
   async getSongById(id) {
@@ -47,7 +62,7 @@ class SongsService {
 
     const result = await this._pool.query(getSongByIDQuery);
 
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError('Song not found.');
     }
 
@@ -74,7 +89,7 @@ class SongsService {
 
     const result = await this._pool.query(editSongByIDQuery);
 
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError('Song could not be found. Failed to update it.');
     }
   }
@@ -87,7 +102,7 @@ class SongsService {
 
     const result = await this._pool.query(deleteSongbyIDQuery);
 
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError('Album tak ditemukan. Gagal menghapus album.');
     }
   }
