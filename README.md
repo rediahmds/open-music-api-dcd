@@ -1,6 +1,6 @@
-# 🎼 OpenMusic V1
+# 🎼 OpenMusic
 
-Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.
+OpenMusic adalah layanan backend yang digunakan untuk submission pada kelas "Fundamental Aplikasi Back-end" Dicoding Indonesia.
 
 ## ✅ To-do List
 
@@ -10,15 +10,15 @@ Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.
   - [x] Validasi data di kedua endpoint menggunakan `Joi`
   - [x] Error Handling (gunakan extension `onPreResponse` event dari Hapi)
   - [x] Menggunakan database dan `dotenv`
-- [ ] Kriteria opsional
-  - [ ] Memunculkan daftar lagu pada suatu album
-  - [ ] Query parameter untuk mencari lagu
-- [ ] Memenuhi semua postman request (Test API)
+- [x] Kriteria opsional
+  - [x] Memunculkan daftar lagu pada suatu album
+  - [x] Query parameter untuk mencari lagu
+- [x] Memenuhi semua postman request (Test API)
 - [x] Menggunakan `ESLint` dan salah satu style guide
-- [ ] Clean code
+- [x] Clean code
 
 ## 💡 Tips
 
 - Untuk menghindari kesalahan `binding` :
-  - Gunakan arrow function pada berkas routes
+  - Gunakan arrow function pada berkas routes (Preferred, lighter, no need to install any packages)
   - Gunakan package `auto-bind`
