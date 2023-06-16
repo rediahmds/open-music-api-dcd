@@ -11,6 +11,10 @@ OpenMusic is a backend service app used for the submission in the "Fundamentals 
 3. Using `node-postgres` to interact with PostgreSQL in a Node app.
 4. Implements the migration technique to manipulate table structures using `pgm`.
 
+#### Summary
+
+OpenMusic V1 implements hapi plugin, validation and database.
+
 #### ✅ OpenMusic V1: To-do List
 
 - [x] Mandatory criteria
