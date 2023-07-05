@@ -43,21 +43,6 @@ class UsersService {
       );
     }
   }
-
-  async getUserById(userId) {
-    const findUserByIdQuery = {
-      text: 'SELECT id, username, fullname FROM users WHERE id = $1',
-      values: [userId],
-    };
-
-    const result = await this._pool.query(findUserByIdQuery);
-
-    if (!result.rowCount) {
-      throw new NotFoundError('User tidak ditemukan');
-    }
-
-    return result.rows[0];
-  }
 }
 
 module.exports = UsersService;
