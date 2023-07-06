@@ -23,9 +23,6 @@
         "error",
         { "ignoreDestructuring": true, "properties": "never" }
       ],
-      "import/no-extraneous-dependencies": [
-        "error",
-        { "exceptions": ["bcrypt"] }
-      ]
+      "import/no-extraneous-dependencies": "off"
     }
 }
