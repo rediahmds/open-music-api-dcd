@@ -47,6 +47,8 @@ OpenMusic V1 implements hapi plugin, validation and database.
 
 OpenMusic V2 implements authentication & authorization using `jwt`, normalize and use foreign key in a database, also learn how to create simple collaboration feature.
 
+To create a new account (sign up), clients should use the `POST /users` endpoint. To log in to an existing account, they should use the `POST /authentications` endpoint.
+
 #### ✅ OpenMusic V2: To-do List
 
 - [ ] Mandatory Criteria
