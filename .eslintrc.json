@@ -25,7 +25,11 @@
       ],
       "import/no-extraneous-dependencies": [
         "error",
-        { "exceptions": ["bcrypt"] }
+        {
+          "devDependencies": true,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
       ]
     }
 }
