@@ -25,7 +25,19 @@
       ],
       "import/no-extraneous-dependencies": [
         "error",
-        { "projectDependencies": true }
+        {
+          "devDependencies": false,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": ["server.js"],
+        "rules": {
+          "no-console": "off"
+        }
+      }
+    ]
 }
