@@ -5,21 +5,28 @@ const ClientError = require('./exceptions/ClientError');
 const albums = require('./apis/albums');
 const songs = require('./apis/songs');
 const users = require('./apis/users');
+const authentications = require('./apis/authentications');
 
 // services
 const AlbumsService = require('./services/AlbumsService');
 const SongsService = require('./services/SongsService');
 const UsersService = require('./services/UsersService');
+const AuthenticationsService = require('./services/AuthenticationsService');
 
 // validators
 const AlbumsValidator = require('./validators/albums');
 const SongsValidator = require('./validators/songs');
 const UsersValidator = require('./validators/users');
+const AuthenticationsValidator = require('./validators/authentications');
+
+// jwt utility
+const TokenManager = require('./tokenize/TokenManager');
 
 const init = async () => {
   const albumsService = new AlbumsService();
   const songsService = new SongsService();
   const usersService = new UsersService();
+  const authenticationsService = new AuthenticationsService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -51,6 +58,15 @@ const init = async () => {
       options: {
         service: usersService,
         validator: UsersValidator,
+      },
+    },
+    {
+      plugin: authentications,
+      options: {
+        authenticationsService,
+        usersService,
+        tokenManager: TokenManager,
+        authenticationsValidator: AuthenticationsValidator,
       },
     },
   ]);
