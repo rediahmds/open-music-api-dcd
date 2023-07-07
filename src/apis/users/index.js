@@ -1,5 +1,4 @@
-const { server } = require('@hapi/hapi');
-const UsersHandler = require('./handler');
+const UsersHandler = require('./UsersHandler');
 const routes = require('./routes');
 
 module.exports = {
