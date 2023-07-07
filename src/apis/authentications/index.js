@@ -19,7 +19,7 @@ module.exports = {
       tokenManager,
       authenticationsValidator
     );
-		
+
     server.route(routes(authenticationsHandler));
   },
 };
