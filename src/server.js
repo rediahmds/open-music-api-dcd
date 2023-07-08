@@ -1,11 +1,16 @@
 const Hapi = require('@hapi/hapi');
-const ClientError = require('./exceptions/ClientError');
+
+// jwt utilities
+const TokenManager = require('./tokenize/TokenManager');
 
 // apis
 const albums = require('./apis/albums');
 const songs = require('./apis/songs');
 const users = require('./apis/users');
 const authentications = require('./apis/authentications');
+
+// exceptions
+const ClientError = require('./exceptions/ClientError');
 
 // services
 const AlbumsService = require('./services/AlbumsService');
@@ -18,9 +23,6 @@ const AlbumsValidator = require('./validators/albums');
 const SongsValidator = require('./validators/songs');
 const UsersValidator = require('./validators/users');
 const AuthenticationsValidator = require('./validators/authentications');
-
-// jwt utility
-const TokenManager = require('./tokenize/TokenManager');
 
 const init = async () => {
   const albumsService = new AlbumsService();
