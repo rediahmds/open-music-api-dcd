@@ -9,6 +9,7 @@ const albums = require('./apis/albums');
 const songs = require('./apis/songs');
 const users = require('./apis/users');
 const authentications = require('./apis/authentications');
+const playlists = require('./apis/playlists');
 
 // exceptions
 const ClientError = require('./exceptions/ClientError');
@@ -18,18 +19,21 @@ const AlbumsService = require('./services/AlbumsService');
 const SongsService = require('./services/SongsService');
 const UsersService = require('./services/UsersService');
 const AuthenticationsService = require('./services/AuthenticationsService');
+const PlaylistsService = require('./services/PlaylistsService');
 
 // validators
 const AlbumsValidator = require('./validators/albums');
 const SongsValidator = require('./validators/songs');
 const UsersValidator = require('./validators/users');
 const AuthenticationsValidator = require('./validators/authentications');
+const PlaylistsValidator = require('./validators/playlists');
 
 const init = async () => {
   const albumsService = new AlbumsService();
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
+  const playlistsService = new PlaylistsService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -93,6 +97,13 @@ const init = async () => {
         usersService,
         tokenManager: TokenManager,
         authenticationsValidator: AuthenticationsValidator,
+      },
+    },
+    {
+      plugin: playlists,
+      options: {
+        service: playlistsService,
+        validator: PlaylistsValidator,
       },
     },
   ]);
