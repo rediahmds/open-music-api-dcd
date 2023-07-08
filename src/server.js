@@ -1,6 +1,7 @@
 const Hapi = require('@hapi/hapi');
 
 // jwt utilities
+const Jwt = require('@hapi/jwt');
 const TokenManager = require('./tokenize/TokenManager');
 
 // apis
@@ -38,6 +39,29 @@ const init = async () => {
         origin: ['*'],
       },
     },
+  });
+
+  // register external plugins
+  await server.register([
+    {
+      plugin: Jwt,
+    },
+  ]);
+
+  server.auth.strategy('openmusic_jwt', 'jwt', {
+    keys: process.env.ACCESS_TOKEN_KEY,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
+    },
+    validate: (artifacts) => ({
+      isValid: true,
+      credentials: {
+        id: artifacts.decoded.payload.id,
+      },
+    }),
   });
 
   await server.register([
