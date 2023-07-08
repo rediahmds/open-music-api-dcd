@@ -34,7 +34,7 @@
     },
     "overrides": [
       {
-        "files": ["server.js"],
+        "files": ["./src/server.js"],
         "rules": {
           "no-console": "off"
         }
