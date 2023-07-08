@@ -22,6 +22,22 @@
       "camelcase": [
         "error",
         { "ignoreDestructuring": true, "properties": "never" }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": false,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": ["./src/server.js"],
+        "rules": {
+          "no-console": "off"
+        }
+      }
+    ]
 }
