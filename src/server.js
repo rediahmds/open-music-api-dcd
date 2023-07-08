@@ -1,15 +1,36 @@
 const Hapi = require('@hapi/hapi');
-const ClientError = require('./exceptions/ClientError');
+
+// jwt utilities
+const Jwt = require('@hapi/jwt');
+const TokenManager = require('./tokenize/TokenManager');
+
+// apis
 const albums = require('./apis/albums');
-const AlbumsService = require('./services/AlbumsService');
-const AlbumsValidator = require('./validators/albums');
 const songs = require('./apis/songs');
+const users = require('./apis/users');
+const authentications = require('./apis/authentications');
+
+// exceptions
+const ClientError = require('./exceptions/ClientError');
+
+// services
+const AlbumsService = require('./services/AlbumsService');
 const SongsService = require('./services/SongsService');
+const UsersService = require('./services/UsersService');
+const AuthenticationsService = require('./services/AuthenticationsService');
+
+// validators
+const AlbumsValidator = require('./validators/albums');
 const SongsValidator = require('./validators/songs');
+const UsersValidator = require('./validators/users');
+const AuthenticationsValidator = require('./validators/authentications');
 
 const init = async () => {
   const albumsService = new AlbumsService();
   const songsService = new SongsService();
+  const usersService = new UsersService();
+  const authenticationsService = new AuthenticationsService();
+
   const server = Hapi.server({
     port: process.env.PORT,
     host: process.env.HOST,
@@ -18,6 +39,29 @@ const init = async () => {
         origin: ['*'],
       },
     },
+  });
+
+  // register external plugins
+  await server.register([
+    {
+      plugin: Jwt,
+    },
+  ]);
+
+  server.auth.strategy('openmusic_jwt', 'jwt', {
+    keys: process.env.ACCESS_TOKEN_KEY,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
+    },
+    validate: (artifacts) => ({
+      isValid: true,
+      credentials: {
+        id: artifacts.decoded.payload.id,
+      },
+    }),
   });
 
   await server.register([
@@ -33,6 +77,22 @@ const init = async () => {
       options: {
         service: songsService,
         validator: SongsValidator,
+      },
+    },
+    {
+      plugin: users,
+      options: {
+        service: usersService,
+        validator: UsersValidator,
+      },
+    },
+    {
+      plugin: authentications,
+      options: {
+        authenticationsService,
+        usersService,
+        tokenManager: TokenManager,
+        authenticationsValidator: AuthenticationsValidator,
       },
     },
   ]);
