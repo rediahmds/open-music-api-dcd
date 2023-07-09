@@ -10,6 +10,7 @@ const songs = require('./apis/songs');
 const users = require('./apis/users');
 const authentications = require('./apis/authentications');
 const playlists = require('./apis/playlists');
+const playlistSongs = require('./apis/tracks');
 
 // exceptions
 const ClientError = require('./exceptions/ClientError');
@@ -20,6 +21,7 @@ const SongsService = require('./services/SongsService');
 const UsersService = require('./services/UsersService');
 const AuthenticationsService = require('./services/AuthenticationsService');
 const PlaylistsService = require('./services/PlaylistsService');
+const TracksService = require('./services/TracksService');
 
 // validators
 const AlbumsValidator = require('./validators/albums');
@@ -27,6 +29,7 @@ const SongsValidator = require('./validators/songs');
 const UsersValidator = require('./validators/users');
 const AuthenticationsValidator = require('./validators/authentications');
 const PlaylistsValidator = require('./validators/playlists');
+const TracksValidator = require('./validators/tracks');
 
 const init = async () => {
   const albumsService = new AlbumsService();
@@ -34,6 +37,7 @@ const init = async () => {
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
   const playlistsService = new PlaylistsService();
+  const tracksService = new TracksService(playlistsService);
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -106,12 +110,21 @@ const init = async () => {
         validator: PlaylistsValidator,
       },
     },
+    {
+      plugin: playlistSongs,
+      options: {
+        tracksService,
+        playlistsService,
+        tracksValidator: TracksValidator,
+      },
+    },
   ]);
 
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
 
     if (response instanceof Error) {
+      console.log(response);
       if (response instanceof ClientError) {
         const newResponse = h
           .response({
