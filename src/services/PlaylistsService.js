@@ -36,6 +36,24 @@ class PlaylistsService {
     return result.rows;
   }
 
+  async getPlaylistDetailsById(playlistId) {
+    const getSpecificPlaylistQuery = {
+      text: `SELECT playlists.id, playlists.name, users.username
+      FROM playlists
+      INNER JOIN users ON playlists.owner = users.id
+      WHERE playlists.id = $1`,
+      values: [playlistId],
+    };
+
+    const result = await this._pool.query(getSpecificPlaylistQuery);
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Playlist tak ditemukan');
+    }
+
+    return result.rows;
+  }
+
   async deletePlaylistById(playlistId) {
     const deleteOwnerPlaylistQuery = {
       text: 'DELETE FROM playlists WHERE id = $1 RETURNING id',
