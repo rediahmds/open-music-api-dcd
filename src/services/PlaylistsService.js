@@ -3,6 +3,7 @@ const { Pool } = require('pg');
 const InvariantError = require('../exceptions/InvariantError');
 const NotFoundError = require('../exceptions/NotFoundError');
 const AuthorizationError = require('../exceptions/AuthorizationError');
+const { mapPlaylistProps } = require('../utils');
 
 class PlaylistsService {
   constructor() {
@@ -33,7 +34,7 @@ class PlaylistsService {
 
     const result = await this._pool.query(getAllOwnerPlaylistsQuery);
 
-    return result.rows;
+    return result.rows.map(mapPlaylistProps);
   }
 
   async getPlaylistDetailsById(playlistId) {
