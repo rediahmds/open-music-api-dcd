@@ -10,7 +10,7 @@ const songs = require('./apis/songs');
 const users = require('./apis/users');
 const authentications = require('./apis/authentications');
 const playlists = require('./apis/playlists');
-const playlistSongs = require('./apis/tracks');
+const tracks = require('./apis/tracks');
 
 // exceptions
 const ClientError = require('./exceptions/ClientError');
@@ -111,10 +111,11 @@ const init = async () => {
       },
     },
     {
-      plugin: playlistSongs,
+      plugin: tracks,
       options: {
         tracksService,
         playlistsService,
+        songsService,
         tracksValidator: TracksValidator,
       },
     },
