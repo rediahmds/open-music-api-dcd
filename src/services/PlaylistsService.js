@@ -52,7 +52,7 @@ class PlaylistsService {
       throw new NotFoundError('Playlist tak ditemukan');
     }
 
-    return result.rows;
+    return result.rows[0];
   }
 
   async deletePlaylistById(playlistId) {
