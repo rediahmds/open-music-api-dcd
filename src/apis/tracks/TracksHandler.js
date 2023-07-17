@@ -58,7 +58,7 @@ class TracksHandler {
 
     await this._tracksService.verifyPlaylistAccess(playlistId, credentialId);
 
-    const { id: songId } = request.payload;
+    const { songId } = request.payload;
 
     await this._tracksService.deleteTrackById(playlistId, songId);
 
