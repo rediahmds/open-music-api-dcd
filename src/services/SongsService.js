@@ -106,6 +106,24 @@ class SongsService {
       throw new NotFoundError('Album tak ditemukan. Gagal menghapus album.');
     }
   }
+
+  async verifySongExistence(id) {
+    const checkSongExistQuery = {
+      text: 'SELECT title, performer FROM songs WHERE id = $1',
+      values: [id],
+    };
+    try {
+      const result = await this._pool.query(checkSongExistQuery);
+
+      if (!result.rowCount) {
+        throw new NotFoundError('Lagu tak ditemukan.');
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw error;
+      }
+    }
+  }
 }
 
 module.exports = SongsService;
