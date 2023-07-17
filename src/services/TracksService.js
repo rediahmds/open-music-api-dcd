@@ -1,7 +1,6 @@
 const { nanoid } = require('nanoid');
 const { Pool } = require('pg');
 const NotFoundError = require('../exceptions/NotFoundError');
-const AuthorizationError = require('../exceptions/AuthorizationError');
 const InvariantError = require('../exceptions/InvariantError');
 
 class TracksService {
@@ -49,19 +48,6 @@ class TracksService {
       throw new NotFoundError(
         'Gagal menghapus. Lagu atau playlist tak ditemukan'
       );
-    }
-  }
-
-  async verifyPlaylistAccess(playlistId, owner) {
-    try {
-      await this._playlistsService.verifyPlaylistOwnership(playlistId, owner);
-    } catch (error) {
-      if (
-        error instanceof NotFoundError
-        || error instanceof AuthorizationError
-      ) {
-        throw error;
-      }
     }
   }
 }
