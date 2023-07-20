@@ -36,7 +36,7 @@ const init = async () => {
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
-  const playlistsService = new PlaylistsService();
+  const playlistsService = new PlaylistsService(); // TODO: add collab service as constructor arg
   const tracksService = new TracksService(playlistsService);
 
   const server = Hapi.server({
