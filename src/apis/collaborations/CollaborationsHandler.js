@@ -2,10 +2,12 @@ class CollaborationsHandler {
   constructor(
     collaborationsService,
     playlistsService,
+    usersService,
     collaborationsValidator
   ) {
     this._collaborationsService = collaborationsService;
     this._playlistsService = playlistsService;
+    this._usersService = usersService;
     this._collaborationsValidator = collaborationsValidator;
   }
 
@@ -15,7 +17,12 @@ class CollaborationsHandler {
     const { id: credentialId } = request.auth.credentials;
     const { playlistId, userId: collaboratorId } = request.payload;
 
-    this._playlistsService.verifyPlaylistOwnership(playlistId, credentialId);
+    await this._playlistsService.verifyPlaylistOwnership(
+      playlistId,
+      credentialId
+    );
+    await this._usersService.verifyUserExistenceById(collaboratorId);
+
     const collaborationId = await this._collaborationsService.addCollaboration(
       playlistId,
       collaboratorId
