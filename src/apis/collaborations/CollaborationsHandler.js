@@ -45,8 +45,8 @@ class CollaborationsHandler {
     const { id: credentialId } = request.auth.credentials;
     const { playlistId, userId: collaboratorId } = request.payload;
 
-    this._playlistsService.verifyPlaylistOwnership(playlistId, credentialId);
-    this._collaborationsService.deleteCollaboration(playlistId, collaboratorId);
+    await this._playlistsService.verifyPlaylistOwnership(playlistId, credentialId);
+    await this._collaborationsService.deleteCollaboration(playlistId, collaboratorId);
 
     return h.response({
       status: 'success',
