@@ -3,7 +3,6 @@ const { Pool } = require('pg');
 const InvariantError = require('../exceptions/InvariantError');
 const NotFoundError = require('../exceptions/NotFoundError');
 const AuthorizationError = require('../exceptions/AuthorizationError');
-const { mapPlaylistProps } = require('../utils');
 
 class PlaylistsService {
   constructor(collaborationsService) {
@@ -29,13 +28,18 @@ class PlaylistsService {
 
   async getPlaylists(owner) {
     const getAllOwnerPlaylistsQuery = {
-      text: 'SELECT * FROM playlists WHERE owner = $1',
+      text: `SELECT playlists.id, playlists.name, users.username
+      FROM playlists
+      LEFT JOIN collaborations ON collaborations.playlist_id = playlists.id
+      LEFT JOIN users ON users.id = playlists.owner
+      WHERE playlists.owner = $1 OR collaborations.user_id = $1
+      GROUP BY playlists.id, users.username;
+      `,
       values: [owner],
     };
 
     const result = await this._pool.query(getAllOwnerPlaylistsQuery);
-
-    return result.rows.map(mapPlaylistProps);
+    return result.rows;
   }
 
   async getPlaylistDetailsById(playlistId) {
