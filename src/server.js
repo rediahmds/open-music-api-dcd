@@ -128,7 +128,8 @@ const init = async () => {
       options: {
         collaborationsService,
         playlistsService,
-        CollaborationsValidator,
+        usersService,
+        collaborationsValidator: CollaborationsValidator,
       },
     },
   ]);
