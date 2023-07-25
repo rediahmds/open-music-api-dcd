@@ -14,10 +14,7 @@ class TracksHandler {
 
     const { id: playlistId } = request.params;
     const { id: credentialId } = request.auth.credentials;
-    await this._playlistsService.verifyPlaylistOwnership(
-      playlistId,
-      credentialId
-    );
+    await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
     await this._tracksService.addTrack(playlistId, songId);
 
@@ -33,7 +30,7 @@ class TracksHandler {
     const { id: playlistId } = request.params;
     const { id: credentialId } = request.auth.credentials;
 
-    await this._playlistsService.verifyPlaylistOwnership(
+    await this._playlistsService.verifyPlaylistAccess(
       playlistId,
       credentialId
     );
@@ -62,10 +59,7 @@ class TracksHandler {
     const { id: playlistId } = request.params;
     const { id: credentialId } = request.auth.credentials;
 
-    await this._playlistsService.verifyPlaylistOwnership(
-      playlistId,
-      credentialId
-    );
+    await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
     const { songId } = request.payload;
 
