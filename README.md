@@ -51,10 +51,10 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
 
 #### ✅ OpenMusic V2: To-do List
 
-- [ ] Mandatory Criteria
+- [x] Mandatory Criteria
   - [x] Implements user registration and authentication
   - [x] Playlist management feature
-  - [ ] Implements foreign key in tables
+  - [x] Implements foreign key in tables
   - [x] Data validation
   - [x] Error Handling
   - [x] Maintain the OpenMusic V1 features
