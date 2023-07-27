@@ -123,6 +123,7 @@ const init = async () => {
         tracksService,
         playlistsService,
         songsService,
+        playlistActivitiesService,
         tracksValidator: TracksValidator,
       },
     },

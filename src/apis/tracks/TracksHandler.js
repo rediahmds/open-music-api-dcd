@@ -1,9 +1,16 @@
 class TracksHandler {
-  constructor(tracksService, playlistsService, songsService, tracksValidator) {
+  constructor(
+    tracksService,
+    playlistsService,
+    songsService,
+    playlistActivitiesService,
+    tracksValidator
+  ) {
     this._tracksService = tracksService;
     this._playlistsService = playlistsService;
     this._tracksValidator = tracksValidator;
     this._songsService = songsService;
+    this._playlistActivitiesService = playlistActivitiesService;
   }
 
   async postTrackHandler(request, h) {
@@ -17,6 +24,11 @@ class TracksHandler {
     await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
     await this._tracksService.addTrack(playlistId, songId);
+    await this._playlistActivitiesService.writeAddTrackActivity({
+      playlistId,
+      songId,
+      credentialId,
+    });
 
     return h
       .response({
@@ -30,10 +42,7 @@ class TracksHandler {
     const { id: playlistId } = request.params;
     const { id: credentialId } = request.auth.credentials;
 
-    await this._playlistsService.verifyPlaylistAccess(
-      playlistId,
-      credentialId
-    );
+    await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
     const tracksInPlaylist = await this._tracksService.getTracksInPlaylist(
       playlistId
@@ -64,6 +73,11 @@ class TracksHandler {
     const { songId } = request.payload;
 
     await this._tracksService.deleteTrackById(playlistId, songId);
+    await this._playlistActivitiesService.writeDeleteTrackActivity({
+      playlistId,
+      songId,
+      credentialId,
+    });
 
     return h.response({
       status: 'success',
