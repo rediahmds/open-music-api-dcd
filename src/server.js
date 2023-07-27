@@ -12,7 +12,7 @@ const authentications = require('./apis/authentications');
 const playlists = require('./apis/playlists');
 const tracks = require('./apis/tracks');
 const collaborations = require('./apis/collaborations');
-const playlistActivities = require('./apis/playlist_activities');
+const activities = require('./apis/playlist_activities');
 
 // exceptions
 const ClientError = require('./exceptions/ClientError');
@@ -137,7 +137,7 @@ const init = async () => {
       },
     },
     {
-      plugin: playlistActivities,
+      plugin: activities,
       options: {
         playlistActivitiesService,
         playlistsService,
