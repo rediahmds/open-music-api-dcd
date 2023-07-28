@@ -45,12 +45,12 @@ class PlaylistActivitiesService {
   async getPlaylistActivitiesByPlaylistId(playlistId) {
     const getPlaylistActivitiesQuery = {
       text: `
-        SELECT u.username, s.title, a.action, a.timestamp as time
-        FROM activities a
-        INNER JOIN users u ON a.user_id = u.id
-        INNER JOIN songs s ON a.song_id = s.id
-        WHERE a.playlist_id = $1
-        ORDER BY a.timestamp ASC;
+      SELECT u.username, s.title, a.action, a.time
+      FROM playlist_song_activities a
+      INNER JOIN users u ON a.user_id = u.id
+      INNER JOIN songs s ON a.song_id = s.id
+      WHERE a.playlist_id = $1
+      ORDER BY a.time ASC;
     `,
       values: [playlistId],
     };
@@ -61,7 +61,7 @@ class PlaylistActivitiesService {
       throw new NotFoundError('Playlist tidak ditemukan');
     }
 
-    return result;
+    return result.rows;
   }
 }
 
