@@ -14,13 +14,12 @@ class PlaylistActivitiesHandler {
     const playlistActivities = await this._playlistActivitiesService
       .getPlaylistActivitiesByPlaylistId(playlistId);
 
-    console.log(playlistActivities);
-
     return h.response({
       status: 'success',
       message: 'Berhasil mendapatkan daftar aktivitas playlist',
       data: {
-        playlistActivities,
+        playlistId,
+        activities: playlistActivities,
       },
     });
   }
