@@ -58,10 +58,10 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
   - [x] Data validation
   - [x] Error Handling
   - [x] Maintain the OpenMusic V1 features
-- [x] Optional Criteria
-  - [x] Playlist collaboration feature
-  - [x] Playlist activities history
-  - [x] Maintain the OpenMusic V1 features
+- [ ] Optional Criteria
+  - [ ] Playlist collaboration feature
+  - [ ] Playlist activities history
+  - [ ] Maintain the OpenMusic V1 features
 
 #### 💡 OpenMusic V2: Tips
 
