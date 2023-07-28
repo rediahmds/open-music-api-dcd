@@ -27,7 +27,7 @@ class TracksHandler {
     await this._playlistActivitiesService.writeAddTrackActivity({
       playlistId,
       songId,
-      credentialId,
+      userId: credentialId,
     });
 
     return h
@@ -76,7 +76,7 @@ class TracksHandler {
     await this._playlistActivitiesService.writeDeleteTrackActivity({
       playlistId,
       songId,
-      credentialId,
+      userId: credentialId,
     });
 
     return h.response({
