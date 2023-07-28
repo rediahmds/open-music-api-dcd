@@ -8,6 +8,7 @@ class PlaylistActivitiesHandler {
     const { id: playlistId } = request.params;
     const { id: credentialId } = request.auth.credentials;
 
+    await this._playlistsService.verifyPlaylistExistence(playlistId);
     await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
     const playlistActivities = await this._playlistActivitiesService
