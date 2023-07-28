@@ -1,4 +1,3 @@
-// HANDLE VALIDATION AND REQ-RES cycle
 class AlbumsHandler {
   constructor(service, validator) {
     this._service = service;
