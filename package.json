@@ -1,6 +1,6 @@
 {
   "name": "open-music-api-dcd",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia.",
   "main": "index.js",
   "scripts": {
