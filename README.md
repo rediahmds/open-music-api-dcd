@@ -67,6 +67,28 @@ OpenMusic V2 implements authentication & authorization using `jwt`, normalize an
 
 To create a new account (sign up), clients should use the `POST /users` endpoint. To log in to an existing account, they should use the `POST /authentications` endpoint.
 
+### 3️⃣ OpenMusic V3
+
+1. Implements message broker using rabbitmq to decouple services and reduce server workload.
+2. Use FS or Amazon S3 Bucket to store object.
+3. Implements server-side caching with Redis or Memurai.
+
+#### ✅ OpenMusic V3: To-do List
+
+This time, there's no optional criteria, everything are mandatory.
+
+- [ ] Export songs in playlists
+- [ ] Upload album cover
+- [ ] Ability to like/favorites a specific album
+- [ ] Implements server-side caching.
+- [ ] Maintain OpenMusic V1 & V2
+
+#### 💡 OpenMusic V3: Tips
+
+- For reference, they provides ERD to follow. It is students choice to use the ERD they've provided.
+- Run postman tests sequentially and exclude `Upload` tests before running a collection. For `Upload` tests tho, it has to run without collections, it will always be failed otherwise.
+- Create an object to only store sensitive information. So, it will replace the `process.env.XXX` syntax.
+
 ## ℹ️ More Information
 
 - GitHub repo: [rediahmds/open-music-api-dcd: Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia. (github.com)](https://github.com/rediahmds/open-music-api-dcd)
