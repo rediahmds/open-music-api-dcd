@@ -11,10 +11,6 @@ OpenMusic is a backend service app used for the submission in the "Fundamentals 
 3. Using `node-postgres` to interact with PostgreSQL in a Node app.
 4. Implements the migration technique to manipulate table structures using `pgm`.
 
-#### OpenMusic V1: Summary
-
-OpenMusic V1 implements hapi plugin, validation and database.
-
 #### ✅ OpenMusic V1: To-do List
 
 - [x] Mandatory criteria
@@ -36,18 +32,16 @@ OpenMusic V1 implements hapi plugin, validation and database.
   - Use arrow functions in route files (preferred, lighter, no need to install any packages)
   - Use the `auto-bind` package.
 
+#### OpenMusic V1: Summary
+
+OpenMusic V1 implements hapi plugin, validation and database.
+
 ### 2️⃣ OpenMusic V2
 
 1. Implements authentication and authorization using token based schema, JWT specifically.
 2. Learn how to normalize a database.
 3. Implements foreign key
 4. Introduces a way to implement collaboration feature.
-
-#### OpenMusic V2: Summary
-
-OpenMusic V2 implements authentication & authorization using `jwt`, normalize and use foreign key in a database, also learn how to create simple collaboration feature.
-
-To create a new account (sign up), clients should use the `POST /users` endpoint. To log in to an existing account, they should use the `POST /authentications` endpoint.
 
 #### ✅ OpenMusic V2: To-do List
 
@@ -66,6 +60,12 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
 #### 💡 OpenMusic V2: Tips
 
 For references, follow the ERD provided by dicoding. This is optional tho.
+
+#### OpenMusic V2: Summary
+
+OpenMusic V2 implements authentication & authorization using `jwt`, normalize and use foreign key in a database, also learn how to create simple collaboration feature.
+
+To create a new account (sign up), clients should use the `POST /users` endpoint. To log in to an existing account, they should use the `POST /authentications` endpoint.
 
 ## ℹ️ More Information
 
