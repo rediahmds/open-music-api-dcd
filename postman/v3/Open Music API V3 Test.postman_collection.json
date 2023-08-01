@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "01e0b592-6700-4047-abb8-40d54196efad",
+		"_postman_id": "c38652a4-e779-41d2-938b-3b92e21e8c11",
 		"name": "Open Music API V3 Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12297972"
+		"_exporter_id": "25723027"
 	},
 	"item": [
 		{
@@ -8493,7 +8493,7 @@
 								{
 									"key": "cover",
 									"type": "file",
-									"src": []
+									"src": "v3/albums/hello.txt"
 								}
 							]
 						},
@@ -8547,7 +8547,7 @@
 								{
 									"key": "cover",
 									"type": "file",
-									"src": []
+									"src": "v3/albums/picture-large.jpg"
 								}
 							]
 						},
@@ -8608,7 +8608,7 @@
 								{
 									"key": "cover",
 									"type": "file",
-									"src": "mGHcq0kx6/picture-small.jpg"
+									"src": "v3/albums/picture-small.jpg"
 								}
 							]
 						},
