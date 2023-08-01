@@ -18,14 +18,14 @@ const activities = require('./apis/playlist_activities');
 const ClientError = require('./exceptions/ClientError');
 
 // services
-const AlbumsService = require('./services/AlbumsService');
-const SongsService = require('./services/SongsService');
-const UsersService = require('./services/UsersService');
-const AuthenticationsService = require('./services/AuthenticationsService');
-const PlaylistsService = require('./services/PlaylistsService');
-const TracksService = require('./services/TracksService');
-const CollaborationsService = require('./services/CollaborationsService');
-const PlaylistActivitiesService = require('./services/PlaylistActivitiesService');
+const AlbumsService = require('./services/postgres/AlbumsService');
+const SongsService = require('./services/postgres/SongsService');
+const UsersService = require('./services/postgres/UsersService');
+const AuthenticationsService = require('./services/postgres/AuthenticationsService');
+const PlaylistsService = require('./services/postgres/PlaylistsService');
+const TracksService = require('./services/postgres/TracksService');
+const CollaborationsService = require('./services/postgres/CollaborationsService');
+const PlaylistActivitiesService = require('./services/postgres/PlaylistActivitiesService');
 
 // validators
 const AlbumsValidator = require('./validators/albums');
