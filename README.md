@@ -89,6 +89,10 @@ This time, there's no optional criteria, everything are mandatory.
 - Run postman tests sequentially and exclude `Upload` tests before running a collection. For `Upload` tests tho, it has to run without collections, it will always be failed otherwise.
 - Create an object to only store sensitive information. So, it will replace the `process.env.XXX` syntax.
 
+#### OpenMusic V3: Summary
+
+OpenMusic V3 implements a message broker using RabbitMQ to decouple services and reduce server workload. It allows the use of either FS or Amazon S3 Bucket to store objects and introduces server-side caching with Redis or Memurai.
+
 ## ℹ️ More Information
 
 - GitHub repo: [rediahmds/open-music-api-dcd: Submission untuk kelas Fundamental Aplikasi Back-end Dicoding Indonesia. (github.com)](https://github.com/rediahmds/open-music-api-dcd)
