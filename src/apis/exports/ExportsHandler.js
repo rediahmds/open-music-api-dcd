@@ -1,6 +1,7 @@
 class ExportsHandler {
-  constructor(producerService, exportsValidator) {
+  constructor(producerService, playlistsService, exportsValidator) {
     this._service = producerService;
+    this._playlistsService = playlistsService;
     this._validator = exportsValidator;
   }
 
@@ -13,6 +14,10 @@ class ExportsHandler {
       userId,
       targetEmail,
     };
+
+    const { id: playlistId } = request.params;
+    await this._playlistsService.verifyPlaylistExistence(playlistId);
+    await this._playlistsService.verifyPlaylistOwnership(playlistId, userId);
 
     await this._service.sendMessage('export:playlist', JSON.stringify(message));
 
