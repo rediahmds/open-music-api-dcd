@@ -77,7 +77,7 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
 
 This time, there's no optional criteria, everything are mandatory.
 
-- [ ] Export songs in playlists
+- [x] Export songs in playlists
 - [ ] Upload album cover
 - [ ] Ability to like/favorites a specific album
 - [ ] Implements server-side caching.
