@@ -20,7 +20,7 @@ class ExportsHandler {
       playlistId,
       targetEmail,
     };
-    await this._service.sendMessage('export:playlist', JSON.stringify(message));
+    await this._service.sendMessage('export:playlists', JSON.stringify(message));
 
     return h
       .response({
