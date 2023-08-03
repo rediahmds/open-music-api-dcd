@@ -85,9 +85,9 @@ This time, there's no optional criteria, everything are mandatory.
 
 #### 💡 OpenMusic V3: Tips
 
-- For reference, they provides ERD to follow. It is students choice to use the ERD they've provided.
-- Run postman tests sequentially and exclude `Upload` tests before running a collection. For `Upload` tests tho, it has to run without collections, it will always be failed otherwise.
-- Create an object to only store sensitive information. So, it will replace the `process.env.XXX` syntax.
+- [ ] For reference, they provides ERD to follow. It is students choice to use the ERD they've provided.
+- [ ] Run postman tests sequentially and exclude `Upload` tests before running a collection. For `Upload` tests tho, it has to run without collections, it will always be failed otherwise.
+- [ ] Create an object to only store sensitive information. So, it will replace the `process.env.XXX` syntax.
 
 #### OpenMusic V3: Summary
 
