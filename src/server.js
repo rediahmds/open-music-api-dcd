@@ -4,6 +4,9 @@ const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 const TokenManager = require('./tokenize/TokenManager');
 
+// config
+const config = require('./utils/config');
+
 // apis
 const albums = require('./apis/albums');
 const songs = require('./apis/songs');
@@ -50,8 +53,8 @@ const init = async () => {
   const playlistActivitiesService = new PlaylistActivitiesService();
 
   const server = Hapi.server({
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: config.app.port,
+    host: config.app.host,
     routes: {
       cors: {
         origin: ['*'],
