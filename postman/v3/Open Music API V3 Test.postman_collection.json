@@ -8491,10 +8491,10 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "cover",
-									"type": "file",
-									"src": "v3/albums/hello.txt"
-								}
+                  "key": "cover",
+                  "type": "file",
+                  "src": "./albums/hello.txt"
+                }
 							]
 						},
 						"url": {
@@ -8545,10 +8545,10 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "cover",
-									"type": "file",
-									"src": "v3/albums/picture-large.jpg"
-								}
+                  "key": "cover",
+                  "type": "file",
+                  "src": "./albums/picture-large.jpg"
+                }
 							]
 						},
 						"url": {
@@ -8608,7 +8608,7 @@
 								{
 									"key": "cover",
 									"type": "file",
-									"src": "v3/albums/picture-small.jpg"
+									"src": "./albums/picture-small.jpg"
 								}
 							]
 						},
