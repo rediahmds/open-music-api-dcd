@@ -59,7 +59,8 @@ class AlbumsService {
 
     const songs = (await this._pool.query(getSongsByAlbumIdQuery)).rows;
 
-    return { album: result.rows[0], songs };
+    const { cover, ...album } = result.rows[0];
+    return { album: { ...album, coverUrl: cover }, songs };
   }
 
   async editAlbumById(id, { name, year }) {
