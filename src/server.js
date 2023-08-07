@@ -1,4 +1,5 @@
 const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
 
 // jwt utilities
 const Jwt = require('@hapi/jwt');
@@ -70,6 +71,9 @@ const init = async () => {
   await server.register([
     {
       plugin: Jwt,
+    },
+    {
+      plugin: Inert,
     },
   ]);
 
