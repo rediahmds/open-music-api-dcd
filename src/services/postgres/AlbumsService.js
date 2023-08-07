@@ -26,6 +26,15 @@ class AlbumsService {
     return result.rows[0].id;
   }
 
+  async addAlbumartURLById(url, id) {
+    const addAlbumCoverQuery = {
+      text: 'UPDATE albums SET cover = $1 WHERE id = $2;',
+      values: [url, id],
+    };
+
+    await this._pool.query(addAlbumCoverQuery);
+  }
+
   async getAlbums() {
     const result = await this._pool.query('SELECT * FROM albums');
     return result.rows;
