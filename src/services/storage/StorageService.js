@@ -1,17 +1,17 @@
 const fs = require('fs');
 
 class StorageService {
-  constructor(folderName) {
-    this._folder = folderName;
+  constructor(directory) {
+    this._folder = directory;
 
-    if (!fs.existsSync(folderName)) {
-      fs.mkdirSync(folderName, { recursive: true });
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
     }
   }
 
   writeFile(file, meta) {
     const filename = `${+new Date()}${meta.filename}`;
-    const path = `./${this._folder}/${filename}`;
+    const path = `${this._folder}/${filename}`;
 
     const fileStream = fs.createWriteStream(path);
 
@@ -20,6 +20,10 @@ class StorageService {
       file.pipe(fileStream);
       file.on('end', () => resolve(filename));
     });
+  }
+
+  getDirectory() {
+    return this._folder;
   }
 }
 
