@@ -3,8 +3,9 @@ const { Pool } = require('pg');
 const InvariantError = require('../../exceptions/InvariantError');
 
 class AlbumLikesService {
-  constructor() {
+  constructor(cacheService) {
     this._pool = new Pool();
+    this._cacheService = cacheService;
   }
 
   async addLikeAlbum(userId, albumId) {
@@ -21,18 +22,26 @@ class AlbumLikesService {
         'Gagal menyukai album. Terjadi masalah saat menambahkan data ke database'
       );
     }
+
+    await this._cacheService.del(`likes:${albumId}`);
   }
 
   async getAlbumLikesCount(albumId) {
-    const albumLikesCounterQuery = {
-      text: 'SELECT COUNT(*) AS likes FROM album_likes WHERE album_id = $1;',
-      values: [albumId],
-    };
+    try {
+      const result = await this._cacheService.get(`likes:${albumId}`);
+      return { likes: JSON.parse(result), fromCache: true };
+    } catch (error) {
+      const albumLikesCounterQuery = {
+        text: 'SELECT COUNT(*) AS likes FROM album_likes WHERE album_id = $1;',
+        values: [albumId],
+      };
 
-    const result = await this._pool.query(albumLikesCounterQuery);
+      const result = await this._pool.query(albumLikesCounterQuery);
 
-    const { likes } = result.rows[0];
-    return parseInt(likes, 10);
+      const { likes } = result.rows[0];
+      await this._cacheService.set(`likes:${albumId}`, likes);
+      return { likes: parseInt(likes, 10), fromCache: false };
+    }
   }
 
   async deleteLikeAlbum(userId, albumId) {
@@ -42,6 +51,7 @@ class AlbumLikesService {
     };
 
     await this._pool.query(deleteLikeAlbumQuery);
+    await this._cacheService.del(`likes:${albumId}`);
   }
 
   async isAlbumLikedByUser(userId, albumId) {
