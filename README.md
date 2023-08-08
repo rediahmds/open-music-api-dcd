@@ -78,14 +78,14 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
 This time, there's no optional criteria, everything are mandatory.
 
 - [x] Export songs in playlists
-- [ ] Upload album cover
-- [ ] Ability to like/favorites a specific album
+- [x] Upload album cover
+- [x] Ability to like/favorites a specific album
 - [ ] Implements server-side caching.
 - [ ] Maintain OpenMusic V1 & V2
 
 #### 💡 OpenMusic V3: Tips
 
-- [ ] For reference, they provides ERD to follow. It is students choice to use the ERD they've provided.
+- [x] For reference, they provides ERD to follow. It is students choice to use the ERD they've provided.
 - [x] Run postman tests sequentially and exclude `Upload` tests before running a collection. For `Upload` tests tho, it has to run without collections, it will always be failed otherwise.
 - [x] Create an object to only store sensitive information. So, it will replace the `process.env.XXX` syntax.
 
