@@ -31,7 +31,8 @@ class AlbumLikesService {
 
     const result = await this._pool.query(albumLikesCounterQuery);
 
-    return result.rows[0];
+    const { likes } = result.rows[0];
+    return parseInt(likes, 10);
   }
 
   async deleteLikeAlbum(userId, albumId) {
