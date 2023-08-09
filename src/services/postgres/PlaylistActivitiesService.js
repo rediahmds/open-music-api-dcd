@@ -50,7 +50,8 @@ class PlaylistActivitiesService {
   async getPlaylistActivitiesByPlaylistId(playlistId) {
     try {
       const result = await this._cacheService.get(`activities:${playlistId}`);
-      return { activities: JSON.parse(result), fromCache: true };
+      const activities = JSON.parse(result);
+      return { activities, fromCache: true };
     } catch (error) {
       const getPlaylistActivitiesQuery = {
         text: `
@@ -70,8 +71,12 @@ class PlaylistActivitiesService {
         throw new NotFoundError('Playlist tidak ditemukan');
       }
 
-      await this._cacheService.set(`activities:${playlistId}`, JSON.stringify(result.rows));
-      return { activities: result.rows, fromCache: false };
+      const activities = result.rows;
+      await this._cacheService.set(
+        `activities:${playlistId}`,
+        JSON.stringify(activities)
+      );
+      return { activities, fromCache: false };
     }
   }
 }
