@@ -55,8 +55,8 @@ const init = async () => {
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
-  const collaborationsService = new CollaborationsService();
-  const playlistsService = new PlaylistsService(collaborationsService);
+  const collaborationsService = new CollaborationsService(cacheService);
+  const playlistsService = new PlaylistsService(collaborationsService, cacheService);
   const tracksService = new TracksService();
   const playlistActivitiesService = new PlaylistActivitiesService(cacheService);
   const storageService = new StorageService('uploads/album/cover');

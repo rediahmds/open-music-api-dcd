@@ -24,14 +24,22 @@ class PlaylistsHandler {
 
   async getPlaylistsHandler(request, h) {
     const { id: credentialId } = request.auth.credentials;
-    const playlists = await this._service.getPlaylists(credentialId);
+    const { playlists, fromCache } = await this._service.getPlaylists(
+      credentialId
+    );
 
-    return h.response({
+    const response = h.response({
       status: 'success',
       data: {
         playlists,
       },
     });
+
+    if (fromCache) {
+      return response.header('X-Data-Source', 'cache');
+    }
+
+    return response;
   }
 
   async deletePlaylistHandler(request, h) {
