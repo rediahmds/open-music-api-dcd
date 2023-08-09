@@ -11,17 +11,23 @@ class PlaylistActivitiesHandler {
     await this._playlistsService.verifyPlaylistExistence(playlistId);
     await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
-    const playlistActivities = await this._playlistActivitiesService
+    const { activities, fromCache } = await this._playlistActivitiesService
       .getPlaylistActivitiesByPlaylistId(playlistId);
 
-    return h.response({
+    const response = h.response({
       status: 'success',
       message: 'Berhasil mendapatkan daftar aktivitas playlist',
       data: {
         playlistId,
-        activities: playlistActivities,
+        activities,
       },
     });
+
+    if (fromCache) {
+      return response.header('X-Data-Source', 'cache');
+    }
+
+    return response;
   }
 }
 

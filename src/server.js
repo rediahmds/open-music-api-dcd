@@ -50,6 +50,7 @@ const ExportsValidator = require('./validators/exports');
 const UploadsValidator = require('./validators/uploads');
 
 const init = async () => {
+  const cacheService = new CacheService();
   const albumsService = new AlbumsService();
   const songsService = new SongsService();
   const usersService = new UsersService();
@@ -57,9 +58,8 @@ const init = async () => {
   const collaborationsService = new CollaborationsService();
   const playlistsService = new PlaylistsService(collaborationsService);
   const tracksService = new TracksService();
-  const playlistActivitiesService = new PlaylistActivitiesService();
+  const playlistActivitiesService = new PlaylistActivitiesService(cacheService);
   const storageService = new StorageService('uploads/album/cover');
-  const cacheService = new CacheService();
   const albumLikesService = new AlbumLikesService(cacheService);
 
   const server = Hapi.server({
