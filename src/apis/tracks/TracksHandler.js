@@ -44,22 +44,28 @@ class TracksHandler {
 
     await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
 
-    const tracksInPlaylist = await this._tracksService.getTracksInPlaylist(
-      playlistId
-    );
     const playlistDetails = await this._playlistsService.getPlaylistDetailsById(
       playlistId
     );
+    const { songs, fromCache } = await this._tracksService.getTracksInPlaylist(
+      playlistId
+    );
 
-    return h.response({
+    const response = h.response({
       status: 'success',
       data: {
         playlist: {
           ...playlistDetails,
-          songs: tracksInPlaylist,
+          songs,
         },
       },
     });
+
+    if (fromCache) {
+      return response.header('X-Data-Source', 'cache');
+    }
+
+    return response;
   }
 
   async deleteTrackHandler(request, h) {
