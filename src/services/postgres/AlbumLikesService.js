@@ -29,7 +29,8 @@ class AlbumLikesService {
   async getAlbumLikesCount(albumId) {
     try {
       const result = await this._cacheService.get(`likes:${albumId}`);
-      return { likes: JSON.parse(result), fromCache: true };
+      const likes = JSON.parse(result);
+      return { likes, fromCache: true };
     } catch (error) {
       const albumLikesCounterQuery = {
         text: 'SELECT COUNT(*) AS likes FROM album_likes WHERE album_id = $1;',
