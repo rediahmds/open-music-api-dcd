@@ -78,10 +78,10 @@ To create a new account (sign up), clients should use the `POST /users` endpoint
 This time, there's no optional criteria, everything are mandatory.
 
 - [x] Export songs in playlists
-- [x] Upload album cover
+- [ ] Upload album cover (Buggy, when the folder is not created yet)
 - [x] Ability to like/favorites a specific album
-- [ ] Implements server-side caching.
-- [ ] Maintain OpenMusic V1 & V2
+- [x] Implements server-side caching.
+- [x] Maintain OpenMusic V1 & V2
 
 #### 💡 OpenMusic V3: Tips
 
