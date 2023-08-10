@@ -74,7 +74,8 @@ class PlaylistActivitiesService {
       const activities = result.rows;
       await this._cacheService.set(
         `activities:${playlistId}`,
-        JSON.stringify(activities)
+        JSON.stringify(activities),
+        900
       );
       return { activities, fromCache: false };
     }

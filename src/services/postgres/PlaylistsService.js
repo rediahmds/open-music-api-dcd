@@ -48,7 +48,8 @@ class PlaylistsService {
       const playlists = result.rows;
       await this._cacheService.set(
         `playlists:${owner}`,
-        JSON.stringify(playlists)
+        JSON.stringify(playlists),
+        900
       );
       return { playlists, fromCache: false };
     }
