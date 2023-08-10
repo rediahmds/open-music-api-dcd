@@ -4,8 +4,9 @@ const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
 class PlaylistActivitiesService {
-  constructor() {
+  constructor(cacheService) {
     this._pool = new Pool();
+    this._cacheService = cacheService;
   }
 
   async writeAddTrackActivity({ playlistId, songId, userId }) {
@@ -23,6 +24,8 @@ class PlaylistActivitiesService {
     if (!result.rows[0].id) {
       throw new InvariantError('Gagal mencatat aktivitas');
     }
+
+    this._cacheService.del(`activities:${playlistId}`);
   }
 
   async writeDeleteTrackActivity({ playlistId, songId, userId }) {
@@ -40,28 +43,42 @@ class PlaylistActivitiesService {
     if (!result.rows[0].id) {
       throw new InvariantError('Gagal mencatat aktivitas');
     }
+
+    this._cacheService.del(`activities:${playlistId}`);
   }
 
   async getPlaylistActivitiesByPlaylistId(playlistId) {
-    const getPlaylistActivitiesQuery = {
-      text: `
-      SELECT u.username, s.title, a.action, a.time
-      FROM playlist_song_activities a
-      INNER JOIN users u ON a.user_id = u.id
-      INNER JOIN songs s ON a.song_id = s.id
-      WHERE a.playlist_id = $1
-      ORDER BY a.time ASC;
-    `,
-      values: [playlistId],
-    };
+    try {
+      const result = await this._cacheService.get(`activities:${playlistId}`);
+      const activities = JSON.parse(result);
+      return { activities, fromCache: true };
+    } catch (error) {
+      const getPlaylistActivitiesQuery = {
+        text: `
+        SELECT u.username, s.title, a.action, a.time
+        FROM playlist_song_activities a
+        INNER JOIN users u ON a.user_id = u.id
+        INNER JOIN songs s ON a.song_id = s.id
+        WHERE a.playlist_id = $1
+        ORDER BY a.time ASC;
+      `,
+        values: [playlistId],
+      };
 
-    const result = await this._pool.query(getPlaylistActivitiesQuery);
+      const result = await this._pool.query(getPlaylistActivitiesQuery);
 
-    if (!result.rowCount) {
-      throw new NotFoundError('Playlist tidak ditemukan');
+      if (!result.rowCount) {
+        throw new NotFoundError('Playlist tidak ditemukan');
+      }
+
+      const activities = result.rows;
+      await this._cacheService.set(
+        `activities:${playlistId}`,
+        JSON.stringify(activities),
+        900
+      );
+      return { activities, fromCache: false };
     }
-
-    return result.rows;
   }
 }
 

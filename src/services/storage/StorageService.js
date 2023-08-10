@@ -4,15 +4,14 @@ class StorageService {
   constructor(directory) {
     this._folder = directory;
 
-    if (!fs.existsSync(directory)) {
-      fs.mkdirSync(directory, { recursive: true });
-    }
+    this.ensureDirExistence();
   }
 
   writeFile(file, meta) {
     const filename = `${+new Date()}${meta.filename}`;
     const path = `${this._folder}/${filename}`;
 
+    this.ensureDirExistence();
     const fileStream = fs.createWriteStream(path);
 
     return new Promise((resolve, reject) => {
@@ -24,6 +23,12 @@ class StorageService {
 
   getDirectory() {
     return this._folder;
+  }
+
+  ensureDirExistence(directory = this._folder) {
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
+    }
   }
 }
 

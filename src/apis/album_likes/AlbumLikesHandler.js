@@ -25,9 +25,8 @@ class AlbumLikesHandler {
     const { id: albumId } = request.params;
     await this._albumsService.verifyAlbumExistence(albumId);
 
-    const likes = await this._albumLikesService.getAlbumLikesCount(albumId);
-
-    return h
+    const { likes, fromCache } = await this._albumLikesService.getAlbumLikesCount(albumId);
+    const response = h
       .response({
         status: 'success',
         message: 'Berhasil mendapatkan informasi jumlah penyuka album.',
@@ -36,6 +35,12 @@ class AlbumLikesHandler {
         },
       })
       .code(200);
+
+    if (fromCache) {
+      return response.header('X-Data-Source', 'cache');
+    }
+
+    return response;
   }
 
   async deleteLikeHandler(request, h) {

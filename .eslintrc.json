@@ -33,7 +33,8 @@
           "optionalDependencies": false,
           "peerDependencies": false
         }
-      ]
+      ],
+      "no-console": ["error", { "allow": ["error"] }]
     },
     "overrides": [
       {

@@ -80,8 +80,8 @@ This time, there's no optional criteria, everything are mandatory.
 - [x] Export songs in playlists
 - [x] Upload album cover
 - [x] Ability to like/favorites a specific album
-- [ ] Implements server-side caching.
-- [ ] Maintain OpenMusic V1 & V2
+- [x] Implements server-side caching.
+- [x] Maintain OpenMusic V1 & V2
 
 #### 💡 OpenMusic V3: Tips
 
