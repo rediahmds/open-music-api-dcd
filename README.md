@@ -1,6 +1,6 @@
 # 🎼 OpenMusic
 
-OpenMusic is a backend service app used for the submission in the "Fundamentals of Back-end Application" class by Dicoding Indonesia.
+OpenMusic is a backend service that implements CRUD operation. It allows you to add song, playlist, albums, collaborate a playlist, with authentication and authorization feature.
 
 ## 📑 Major Topics Covered in Each Version
 
