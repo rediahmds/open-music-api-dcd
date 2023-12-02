@@ -2,6 +2,8 @@
 
 OpenMusic is a backend service that implements CRUD operation. It allows you to add song, playlist, albums, collaborate a playlist, with authentication and authorization feature.
 
+Here's the link to the [consumer](https://github.com/rediahmds/open-music-api-dcd-consumer) source code
+
 ## 📑 Major Topics Covered in Each Version
 
 ### 1️⃣ OpenMusic V1
