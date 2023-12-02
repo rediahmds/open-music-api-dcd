@@ -1,4 +1,4 @@
-# 🎼 OpenMusic
+# 🎼 OpenMusic (Producer)
 
 OpenMusic is a backend service that implements CRUD operation. It allows you to add song, playlist, albums, collaborate a playlist, with authentication and authorization feature.
 
